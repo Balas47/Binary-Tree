@@ -28,8 +28,10 @@ public:
   // Functions for basic functionality
   void insert(int value);
   bool remove(int value);
-  int search(int value);
+  bool search(int value);
   void clear();
+  int max();
+  int min();
 
 };
 

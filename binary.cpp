@@ -11,7 +11,7 @@ BST::~BST(){
 
 // Overloaded output
 std::ostream& operator<<(std::ostream& out, const BST &tree){
-  tree.display(out, tree.root);
+  if(tree.root) tree.display(out, tree.root);
   out << std::endl;
   return out;
 }
@@ -75,8 +75,6 @@ bool BST::remove(int value){
   // If the item was found, remove it
   if(item){
 
-
-
     // The node had no children
     if(!item->left && !item->right){
 
@@ -139,16 +137,46 @@ bool BST::remove(int value){
   return false;
 }
 
-int BST::search(int value){
-  return 0;
+bool BST::search(int value){
+  Node *result = nodeSearch(value, root);
+  if(result) return true;
+  return false;
 }
 
 // Actual searching
 Node* BST::nodeSearch(int value, Node *node){
-  return NULL;
+  if(!node) return NULL;
+
+  if(!(node->data > value || node->data < value)) return node;
+
+  if(node->data > value) return nodeSearch(value, node->left);
+  else return nodeSearch(value, node->right);
 }
 
-void BST::clear(){}
+int BST::max(){
+  if(!root) return 0;
+
+  Node *look = root;
+  while(look->right) look = look->right;
+
+  return look->data;
+}
+
+int BST::min(){
+
+  if(!root) return 0;
+
+  Node *look = root;
+  while(look->left) look = look->left;
+
+  return look->data;
+
+}
+
+void BST::clear(){
+  if(root) clearNodes(root);
+  root = NULL;
+}
 
 // Actual clearing
 void BST::clearNodes(Node *node){
@@ -158,5 +186,6 @@ void BST::clearNodes(Node *node){
     clearNodes(node->left);
     clearNodes(node->right);
     delete node;
+    node = NULL;
   }
 }

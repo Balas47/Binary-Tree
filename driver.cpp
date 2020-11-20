@@ -33,6 +33,7 @@ int main(){
 
   std::cout << "##############" << std::endl;
   std::cout << "Removal Tests" << std::endl;
+
   BST orig;
   orig.insert(5);
   orig.insert(2);
@@ -54,8 +55,32 @@ int main(){
   std::cout << "After Removing Root of First Tree: ";
   theTree.remove(50);
   std::cout << theTree;
+  std::cout << "After Removing Non-existent Item: ";
+  theTree.remove(0);
+  std::cout << theTree;
+  std::cout << "##############\n" << std::endl;
 
-  std::cout << "##############" << std::endl;
+  std::cout << "############" << std::endl;
+  std::cout << "Search Tests" << std::endl;
+
+  for(int i=0;i<20;i++){
+    int look = std::rand() % 100;
+    std::cout << "Looking for " << look << ": " << theTree.search(look) << std::endl;
+  }
+  std::cout << "############\n" << std::endl;
+
+  std::cout << "###################" << std::endl;
+  std::cout << "Finding Max and Min" << std::endl;
+  std::cout << "Max: " << theTree.max() << std::endl;
+  std::cout << "Min: " << theTree.min() << std::endl;
+  std::cout << "###################\n" << std::endl;
+
+  std::cout << "#############################" << std::endl;
+  std::cout << "Testing clear() Functionality" << std::endl;
+
+  theTree.clear();
+  std::cout << "Clearing First Tree: " << theTree;
+  std::cout << "#############################\n" << std::endl;
 
   return 1;
 }
