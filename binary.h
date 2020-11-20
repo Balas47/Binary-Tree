@@ -5,19 +5,32 @@
 
 struct Node{
   int data;
-  Node *left;
-  Node *right;
+  Node *left = NULL;
+  Node *right = NULL;
 };
 
 class BST{
-
- private:
+private:
   Node *root;
+  Node* nodeSearch(int value, Node *node);  // Actual searching
+  void clearNodes(Node *node);  // Actual clearing
+  std::ostream& display(std::ostream& out, const Node* node);  // Actual displaying
 
- public:
+public:
+
+  // Constructor and Destructor
   BST();
   ~BST();
-  
+
+  // Overloaded output
+  friend std::ostream& operator<<(std::ostream& out, const BST &tree);
+
+  // Functions for basic functionality
+  void insert(int value);
+  bool remove(int value);
+  int search(int value);
+  void clear();
+
 };
 
 #endif

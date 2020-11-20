@@ -8,4 +8,4 @@ bst.out: $(TARGETS)
 	$(CXX) $(CXXFLAGS) $(TARGETS) -o bst.out
 
 binary.o: $(SOURCES)
-	$(CXX) $(CXXFLAGS) $(SOURCES) -c
+	$(CXX) $(CXXFLAGS) -c binary.cpp
