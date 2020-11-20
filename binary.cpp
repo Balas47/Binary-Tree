@@ -61,6 +61,65 @@ void BST::insert(int value){
 }
 
 bool BST::remove(int value){
+
+  Node *prev = NULL;
+  Node *item = root;
+
+  while(item && (item->data > value || item->data < value)){
+    prev = item;
+    if(item->data > value) item = item->left;
+    else if (item->data < value) item = item->right;
+    else break;
+  }
+
+  // If the item was found, remove it
+  if(item){
+
+
+
+    // The node had no children
+    if(!item->left && !item->right){
+      if(prev->data < item->data) prev->right = NULL;
+      else prev->left = NULL;
+      delete item;
+      item = NULL;
+
+    // The node has one child
+    }else if(!item->left && item->right){
+
+      if(prev->data < item->data) prev->right = item->right;
+      else prev->left = item->right;
+      delete item;
+      item = NULL;
+
+    }else if(!item->right && item->left){
+
+      if(prev->data < item->data) prev->right = item->left;
+      else prev->left = item->left;
+      delete item;
+      item = NULL;
+
+    }else{
+      // Minimum of the right subtree
+      Node *minimum = item->right;
+      Node *before = item;
+
+      while(minimum->left){
+        if(before == item) before = item->right;
+        else before = before->left;
+        minimum = minimum->left;
+      }
+
+      // Set the node to be the smallest in the subtree
+      item->data = minimum->data;
+      if(before != item) before->left = NULL;
+      else before->right = NULL;
+      delete minimum;
+    }
+
+    return true;
+  }
+
   return false;
 }
 
