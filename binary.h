@@ -14,7 +14,7 @@ private:
   Node *root;
   Node* nodeSearch(int value, Node *node);  // Actual searching
   void clearNodes(Node *node);  // Actual clearing
-  std::ostream& display(std::ostream& out, const Node* node);  // Actual displaying
+  std::ostream& display(std::ostream& out, const Node* node) const;  // Actual displaying
 
 public:
 
