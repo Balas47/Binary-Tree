@@ -79,23 +79,31 @@ bool BST::remove(int value){
 
     // The node had no children
     if(!item->left && !item->right){
-      if(prev->data < item->data) prev->right = NULL;
-      else prev->left = NULL;
+
+      // Make sure we are not at the root
+      if(prev){
+        if(prev->data < item->data) prev->right = NULL;
+        else prev->left = NULL;
+      }else root = NULL;
       delete item;
       item = NULL;
 
     // The node has one child
     }else if(!item->left && item->right){
 
-      if(prev->data < item->data) prev->right = item->right;
-      else prev->left = item->right;
+      if(prev){
+        if(prev->data < item->data) prev->right = item->right;
+        else prev->left = item->right;
+      }else root = item->right;
       delete item;
       item = NULL;
 
     }else if(!item->right && item->left){
 
-      if(prev->data < item->data) prev->right = item->left;
-      else prev->left = item->left;
+      if(prev){
+        if(prev->data < item->data) prev->right = item->left;
+        else prev->left = item->left;
+      }else root = item->left;
       delete item;
       item = NULL;
 
@@ -112,8 +120,16 @@ bool BST::remove(int value){
 
       // Set the node to be the smallest in the subtree
       item->data = minimum->data;
-      if(before != item) before->left = NULL;
-      else before->right = NULL;
+      if(before != item){
+
+        // In case the minimum was not a leaf
+        if(!minimum->right) before->left = NULL;
+        else if(minimum->right) before->left = minimum->right;
+      }
+      else{
+        if(!minimum->right) before->right = NULL;
+        else before->right = minimum->right;
+      }
       delete minimum;
     }
 

@@ -48,7 +48,7 @@ int main(){
   orig.remove(5);
   std::cout << orig;
   std::cout << "After Removing Everything: ";
-  //orig.remove(3);
+  orig.remove(3);
   orig.remove(7);
   std::cout << orig;
   std::cout << "After Removing Root of First Tree: ";
